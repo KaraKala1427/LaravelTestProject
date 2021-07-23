@@ -1,7 +1,7 @@
 @extends('layouts.standard')
 
 @section('title-block')
-About
+О нас
 @endsection
 
 @section('content')

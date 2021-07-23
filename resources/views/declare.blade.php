@@ -1,7 +1,7 @@
 @extends('layouts.standard')
 
 @section('title-block')
-Contacts
+Доска для объявление
 @endsection
 
 @section('content')
@@ -33,4 +33,10 @@ Contacts
     </div>
     <button type="submit" class="btn btn-success">Добавить запись</button>
 </form>
+@endsection
+
+@section('requirements')
+    <div class="col-4">
+        @include('inc.aside')
+    </div>
 @endsection

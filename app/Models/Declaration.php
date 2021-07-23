@@ -9,4 +9,6 @@ class Declaration extends Model
 {
     use HasFactory;
     protected $table='Declarations';
+
+
 }

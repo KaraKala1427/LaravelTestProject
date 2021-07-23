@@ -15,7 +15,6 @@ class DeclareController extends Controller
             'price' => 'required',
             'img' => 'required'
         ]);
-//        dd($a);
 
         if($req->hasFile('img')) {
             $image = $req->file('img')->getClientOriginalName();
@@ -35,8 +34,9 @@ class DeclareController extends Controller
     }
 
     public function allData(){
-        $declaration = new Declaration();
-        return view('declarations', ['data' => $declaration->all()]);
+        $declaration = Declaration::paginate(10);
+        $data = $declaration;
+        return view('declarations', compact('data'));
     }
 
 
@@ -60,7 +60,6 @@ class DeclareController extends Controller
             'price' => 'required',
             'img' => 'required'
         ]);
-//        dd($a);
 
         if($req->hasFile('img')) {
             $image = $req->file('img')->getClientOriginalName();

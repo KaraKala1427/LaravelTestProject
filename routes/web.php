@@ -1,21 +1,15 @@
 <?php
 
 use App\Http\Controllers\DeclareController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomeController::class,'index'])->name('home');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', [HomeController::class,'getAbout'])->name('about');
 
-Route::get('/declarations', function () {
-    return view('declare');
-})->name('declare');
+Route::get('/declare', [HomeController::class,'getDeclare'])->name('declare');
 
-// обработчик url адресов - именные отслеживание url адресов
 Route::post('/declarations/submit', [DeclareController::class, 'submit'])->name('postDeclare');
 
 Route::get('/declarations/all', [DeclareController::class, 'allData'])->name('allDeclaration');

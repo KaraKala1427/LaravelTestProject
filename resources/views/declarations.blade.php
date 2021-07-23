@@ -14,4 +14,12 @@
         <a href="{{ route('declarationDetail', $element->id) }}"><button class="btn btn-warning">Детально</button></a>
     </div>
 @endforeach
+
+    <span>
+        {{$data->links()}}
+    </span>
 @endsection
+
+<style>
+
+</style>
