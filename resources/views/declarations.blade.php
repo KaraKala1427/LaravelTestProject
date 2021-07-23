@@ -1,7 +1,7 @@
 @extends('layouts.standard')
 
 @section('title-block')
-All messages
+Все объявления
 @endsection
 
 @section('content')
