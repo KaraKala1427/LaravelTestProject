@@ -11,6 +11,7 @@ use Validator;
 
 class AuthController extends Controller
 {
+    public $sId = '';
     /**
      * Create a new AuthController instance.
      *
@@ -38,7 +39,6 @@ class AuthController extends Controller
         if (! $token = auth()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-
         return $this->createNewToken($token);
     }
 

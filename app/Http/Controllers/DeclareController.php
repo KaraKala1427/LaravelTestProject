@@ -54,7 +54,8 @@ class DeclareController extends Controller
         }
         catch (DeclarationNotFoundException $exception){
             report($exception);
-            return back()->withError($exception->getMessage())->withInput();
+            $message = $exception->getMessage();
+            return view('errors.404',compact('message'));
         }
         return view('one-declaration', ['data' => $data]);
     }
