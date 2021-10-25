@@ -6,7 +6,7 @@
 
 @section('content')
     <h1>Добавление объявление</h1>
-@auth
+{{--@auth--}}
 <form action="{{ route('postDeclare') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
@@ -33,7 +33,7 @@
     </div>
     <button type="submit" class="btn btn-success">Добавить запись</button>
 </form>
-@endauth
+{{--@endauth--}}
 
 @endsection
 

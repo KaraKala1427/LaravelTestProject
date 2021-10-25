@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\DeclarationNotFoundException;
 use App\Models\Declaration;
+use App\Services\DeclarationService;
 use Illuminate\Http\Request;
 
 
 class DeclareController extends Controller
 {
+    private $service;
+
+    public function __construct(DeclarationService $service)
+    {
+        $this->service = $service;
+    }
     public function submit(Request $req) {
         $a = $req->validate([
             'name' => 'required|max:200',
@@ -41,14 +49,20 @@ class DeclareController extends Controller
 
 
     public function showOneDeclaration($id){
-        $declaration = new Declaration();
-        return view('one-declaration', ['data' => $declaration->find($id)]);
+        try {
+            $data = $this->service->search($id);
+        }
+        catch (DeclarationNotFoundException $exception){
+            report($exception);
+            return back()->withError($exception->getMessage())->withInput();
+        }
+        return view('one-declaration', ['data' => $data]);
     }
 
 
     public function updateDeclaration($id){
-        $declaration = new Declaration();
-        return view('update-declaration', ['data' => $declaration->find($id)]);
+        $data = Declaration::find($id);
+        return view('update-declaration', ['data' => $data]);
     }
 
 
@@ -82,5 +96,11 @@ class DeclareController extends Controller
     public function deleteDeclaration($id){
         Declaration::find($id)->delete();
         return redirect()->route('allDeclaration')->with('success','Объявление было удалено');
+    }
+
+    public function search(Request $request){
+        $search = $request->search;
+        $data = Declaration::where('name','LIKE',"%{$search}%")->paginate(10);
+        return view('declarations', compact('data'));
     }
 }
